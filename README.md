@@ -10,8 +10,9 @@ Copy this document and change the name to hw3b_answers_\[LASTNAME\].md, and repl
 
 Please use the differential expression R package assigned here:
 
-DESeq2: Walter, Annaliese, Sabrina, Matthew, Katy, Caroline
-edgeR: Evie, Mira, Kate, Jane, Max, Sun
+**DESeq2**: Walter, Annaliese, Sabrina, Matthew, Katy, Caroline
+
+**edgeR**: Evie, Mira, Kate, Jane, Max, Sun
 
 Note: If you're not formally enrolled but want to do this homework, please pick whichever DE package strikes your fancy.
 
