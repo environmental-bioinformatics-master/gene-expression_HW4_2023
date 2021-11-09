@@ -48,13 +48,14 @@ After installing your DE package(s) and loading them via the library(PACKAGE) co
 
 ## Step 2: Load data and prep for DE analysis
 
-To test for differential expression of eye genes at night vs during the day, you'll need to associate samples with their capture metadata. I've provided a file called `HW4_sample_metadata.txt` listing this information for each sample. Note that this files lists the SRR numbers only, while the sample names in your count file may be named slightly differently. These names will need to be identical between the two files for downstream processing. Change the sample names in your counts table to match those in the sample treatment file. You can use any approach you like. How did you do this?
+To test for differential expression of eye genes at night vs during the day, you'll need to associate samples with the depth at whih they were captured (your experimental "treatments"). I've provided a file called `hw4_sample_metadata.csv` listing all the SRA information given for each sample. Note that this files lists the SRR numbers only, while the sample names in your count file may be named slightly differently. These names **have to** be identical between the two files for downstream processing. If necessary, change the sample names in your counts table to match those in the sample metadata file. You can use any approach you like. How did you do this?
 
 >Answer:
 
 For your homework, create a new R script called `hw4b_de_\[LASTNAME\].R`. In it, put all of the commands you use to analyse your data, starting with loading R packages. We don't need to be able to run this script from the command line, but we should be able to copy your commands into R and replicate your analysis.
 
 First, you need to load your data in a format that your DE program can read. Most of the programs we're using require data in matrix format. This should load your count data in an appropriate format for downstream work:
+
 ```
 counts = as.matrix(read.csv("COUNT_TABLE_FILE", sep="\t", row.names="Contig"))
 ```
@@ -63,41 +64,48 @@ Check your matrix with dim(counts) and head(counts), to make sure it loaded prop
 >Answer:
 
 Now, load the treatment data:
-treatment = read.csv("HW3_sample_treatments.txt", sep = "\t", row.names=1, header = T)
+
+```
+treatment = read.csv("hw4_sample_metadata.csv", row.names=1, header = T)
+```
 
 ...and check that it has loaded properly.
 
 Your samples are probably not in the same order in the counts and treatment files, but they should be. Re-order the columns in your counts table to match the (numerical) ordering in the treatment file like this:
+
+```
 counts = counts[, rownames(treatment)]
+```
 
 Check that this re-ordering worked with head(counts).
-Step 3: Begin your DE analysis
 
-For some approaches, you may want to pre-filter your data set to remove genes with very low expression. This slims down the data by removing genes whose expression is too low to give you any useful information on differential expression, which is helpful when you adjust your p-values to account for multiple tests. Various approaches handle low-expression filtering differently, and some explicitly do not recommend it; use the approach recommended for your DE package.
+## Step 3: Begin your DE analysis
+
+For some approaches, you may want to pre-filter your data set to remove genes with very low expression. This slims down the data by removing genes whose expression is too low to give you any useful information on differential expression, which is helpful when you adjust your p-values to account for multiple tests. Various approaches handle low-expression filtering differently, and some explicitly do not recommend it; use the approach recommended for your DE package. Note: Depending on your approach, you may need to load the data into the analysis program before filtering it.
 
 Did you filter or pre-filter your data to remove low-expressed transcripts? If so, what cutoff did you use and why? If not, why not?
-Answer:
+>Answer:
 
 What command(s) did you use to filter your data?
 
 How many transcripts are left in your data set after filtering (or not)?
-Answer:
+>Answer:
 
-Following the guidance for your DE package, load your data into your DE program and associate your treatment information with it. What commands did you use to do this?
-
-Note: Depending on your approach, you may need to load the data before filtering it.
+Following the guidance for your DE package, load your data into your DE program and associate your treatment (depth) information with it. What commands did you use to do this?
+>Answer:
 
 The first step in some approaches is to normalize your data. This compensates for differences in sequencing depth across samples, sequencing biases, etc. This can be done differently depending on the DE analysis program you’re using. Some programs have this type of normalization baked-in, while you have to do it explicitly in others.
 
 What, if any, normalization did you do on your data?
-Answer:
+>Answer:
 
 What metric did you use to normalize your data? What does this mean?
-Answer:
+>Answer:
 
 What command(s) did you use to normalize your data?
+>Answer:
 
-Step 3: Conduct DE analysis
+## Step 3: Conduct DE analysis
 
 Now it’s time to look for differential expression between your two groups. Follow the guidance in your program’s help files on this. Your output should be a table of log-fold changes and p-values for your control:treatment comparison for each gene. (It may include other columns as well.) Make sure p-values are adjusted to alpha = 0.05.
 
