@@ -15,7 +15,7 @@ edgeR: Evie, Mira, Kate, Jane, Max, Sun
 
 Note: If you're not formally enrolled but want to do this homework, please pick whichever DE package strikes your fancy.
 
-You are welcome to interface with R however you prefer for this homework: on Poseidon (via Jupyter if desired) or on your personal computer (via RStudio if desired). Likewise, feel free to work with packages either through conda or directly through R.
+For this part of the homework, modify the r_jupyter yaml file to create a new environment called `HW4B_env`. Make sure to run the extra line of code to set up an R kernel in Jupyter: `R -e 'IRkernel::installspec()'`. Install all of the R programs you use in the environment directly in R, and then spin up a new jupyter notebook in R called `HW4B_diffex.ipynb`. Run all your R commands for differential expression analysis in this notebook, and push it as part of the HW.
 
 Reminder: An extended note on making figures in R on a cluster: Do NOT try to make figures directly using R on Poseidon. By default, R prints to screen…and the HPC doesn’t have a screen. (It will not print to your local computer, since it’s not running locally.) If you want to make a figure, first open an "empty" pdf file, execute the command(s) that would typically print a figure to screen, and then close the pdf like this:
 
@@ -27,23 +27,21 @@ To view the resulting pdf, either copy it to your local computer with scp, or ke
 
 ## Part 1: Background and setup
 
-How are you running R? (Poseidon, personal computer, etc.)
-> Answer:
-
-How did you install your DE packages? (conda or install.packages)
-> Answer:
-
 What DE approach are you using?
-> Answer:
-
-What resources did you use to figure out how to run it (please give URLs, etc)?
 > Answer:
 
 Is it recommended for any particular type of data / analysis?
 > Answer:
 
-After installing your DE package(s) and loading them via the library(PACKAGE) command, type sessionInfo(). This will show you everything that's been loaded, and its version number. Other attached packages gives details on everything loaded directly (rather than called as a dependency only). What packages are listed under "other attached packages"? Include package name and version number.
+What resources did you use to figure out how to run it (please give URLs, etc)?
+> Answer:
 
+What commands did you use to install R packages in your environment?
+
+```
+```
+
+After installing your DE package(s) and loading them in your new notebook via the library(PACKAGE) command, type sessionInfo(). This will show you everything that's been loaded, and its version number. Other attached packages gives details on everything loaded directly (rather than called as a dependency only). What packages are listed under "other attached packages"? Include package name and version number.
 > Answer:
 
 ## Step 2: Load data and prep for DE analysis
@@ -51,8 +49,6 @@ After installing your DE package(s) and loading them via the library(PACKAGE) co
 To test for differential expression of eye genes at night vs during the day, you'll need to associate samples with the depth at whih they were captured (your experimental "treatments"). I've provided a file called `hw4_sample_metadata.csv` listing all the SRA information given for each sample. Note that this files lists the SRR numbers only, while the sample names in your count file may be named slightly differently. These names **have to** be identical between the two files for downstream processing. If necessary, change the sample names in your counts table to match those in the sample metadata file. You can use any approach you like. How did you do this?
 
 >Answer:
-
-For your homework, create a new R script called `hw4b_de_\[LASTNAME\].R`. In it, put all of the commands you use to analyse your data, starting with loading R packages. We don't need to be able to run this script from the command line, but we should be able to copy your commands into R and replicate your analysis.
 
 First, you need to load your data in a format that your DE program can read. Most of the programs we're using require data in matrix format. This should load your count data in an appropriate format for downstream work:
 
@@ -69,7 +65,7 @@ Now, load the treatment data:
 treatment = read.csv("hw4_sample_metadata.csv", row.names=1, header = T)
 ```
 
-...and check that it has loaded properly.
+...and check that it has loaded properly. The factor we're going to compare is `depth_factor`, where I've defined samples as "deep" or "shallow". (R really does not appreciate spaces and dashes as in the original `depth` column.)
 
 Your samples are probably not in the same order in the counts and treatment files, but they should be. Re-order the columns in your counts table to match the (numerical) ordering in the treatment file like this:
 
@@ -91,7 +87,7 @@ What command(s) did you use to filter your data?
 How many transcripts are left in your data set after filtering (or not)?
 >Answer:
 
-Following the guidance for your DE package, load your data into your DE program and associate your treatment (depth) information with it. What commands did you use to do this?
+Following the guidance for your DE package, load your data into your DE program and associate your treatment (depth_factor) information with it. What commands did you use to do this?
 >Answer:
 
 The first step in some approaches is to normalize your data. This compensates for differences in sequencing depth across samples, sequencing biases, etc. This can be done differently depending on the DE analysis program you’re using. Some programs have this type of normalization baked-in, while you have to do it explicitly in others.
@@ -110,44 +106,84 @@ What command(s) did you use to normalize your data?
 Now it’s time to look for differential expression between your two groups. Follow the guidance in your program’s help files on this. Your output should be a table of log-fold changes and p-values for your control:treatment comparison for each gene. (It may include other columns as well.) Make sure p-values are adjusted to alpha = 0.05.
 
 What commands did you use to test differential expression in your data?
+>Answer:
 
 How does your DE program model distribution of read counts (e.g. Poisson, negative binomial, etc)?
-Answer:
+>Answer:
 
 How many different transcripts are you using in this analysis? (Count just those with enough reads mapping to be informative the final DE analysis, excluding any removed from earlier filtering or determined by the program to have low counts.)
-Answer:
+>Answer:
 
-Write your DE table to a tab-separated file like this:
-write.table(RESULTS_TABLE, file = "hw3_de-table_[LASTNAME].tsv", sep = "\t")
+Write your DE table to a comma-separated file like this:
 
-Push your results .tsv file as part of your homework.
-Step 4: Explore your results
+```
+write.csv(RESULTS_TABLE, file = "hw4b_de-table_[LASTNAME].csv", quote = FALSE)
+```
+
+The `quote = FALSE` is important - without this, R will write the contig names in quotation marks, which won't match the quotation-mark-free contig names in the GO annotation file, and the GO_MWU program you'll use for functional analysis will refuse to believe that they are the same names.
+
+Push your results .csv file as part of your homework.
+
+## Step 4: Explore your results
 
 How many genes are differentially expressed at an adjusted standard p-value or equivalent (p < 0.05)?
-Answer:
+>Answer:
 
 How many genes are differentially expressed at an adjusted stringent p-value or equivalent (p < 0.01)?
-Answer:
+>Answer:
 
 How many genes show a log-fold change > 2?
+>Answer:
+
+>How many genes show a log-fold change > 5?
 Answer:
 
-How many genes show a log-fold change > 5?
-Answer:
+What are the 10 most-differentiated transcripts based on p-value?
+>Answer:
 
-What are the 20 most-differentiated transcripts based on p-value?
-Answer:
+What are the 5 transcripts most upregulated in the treatment vs. control, based on log-fold change?
+>Answer:
 
-What are the 10 transcripts most upregulated in the treatment vs. control, based on log-fold change?
-Answer:
+What are the 5 transcripts most downregulated in the treatment vs. control, based on log-fold change?
+>Answer:
 
-What are the 10 transcripts most downregulated in the treatment vs. control, based on log-fold change?
-Answer:
+Why aren't the *same* genes identified using p-values and log2-fold change values?
+>Answer:
 
-Note: All programs have a lot of neat built-in plotting and other functions to explore your data. Feel free to check them out - they are often very helpful - but we're not asking you to include any plots in this homework.
+Note: All programs have a lot of neat built-in plotting and other functions to explore your data. Feel free to check them out - they are often very helpful - but we're not asking you to include any differential expression plots in this homework.
+
+
+## Step 5: Functional enrichment
+
+Now that you have a list of p-values and log2fold-change data, what does it all mean? Let's explore functional enrichment a bit, using an R-based approach called `GO_MWU`: https://github.com/z0on/GO_MWU
+
+This program expects a graphical output and it's a pain to work around this, so copy any necessary files to your local computer and work with GO_MWU in R on your local system. (You may also need to install perl, which is required by the program.)
+
+Clone the GO_MWU repo and follow the directions for running this analysis. The developers helpfully include a "template" file, `GO_MWU.R`, for running in R. Copy this file as `hw4b_go-mwu_LASTNAME.R` and modify this file to apply to your data.
+
+Run GO_MWU on your data using adjusted p-values as your "continuous measure of change". Run this analysis 3 times: once for each GO category (Molecular Function, Cellular Component, Biological Process). There are some parameters you can "tune" to help highlight the most important functional categories without overwhelming the output with a zillion lines - "largest", "smallest", and "clusterCutHeight". Read about these in the program documentation, and play around with them to find a set of parameters that you think represents the data accurately and clearly.
+
+What parameters did you pick for each GO analysis? Why?
+>Molecular Function:
+
+>Biological Process:
+
+>Cellular Compartment:
+
+
+Save the resulting figures as `hw4b_go-mwu-res_\[GO-CATEGORY\]_\[LASTNAME\].pdf`. Scale the figure if needed to ensure it's legible when opened.
+
+
+Using your biological knowledge and all the analyses you've run on these data, what kind of physiological changes do you think are important to diel vertical migration in these shrimp? Please explain briefly (a paragraph, two max):
+
+What caveats do you have about these analyses? If you had the opportunity to conduct one new experiment to explore this in more detail, what would you propose (a paragraph, two max)?
+
+
 
 About how long did this homework take you?
-Answer:
+>Answer:
+
+
 For your homework, please push to GitHub:
 
     hw3b_answers_[LASTNAME].md: An annotated copy of this readme file including your answers.
