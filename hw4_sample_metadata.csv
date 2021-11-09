@@ -1,0 +1,11 @@
+Run,BioProject,BioSample,collection_date,depth,depth_factor,env_broad_scale,geo_loc_name_country,geo_loc_name_country_continent,geo_loc_name,Organism,Platform,Tissue
+SRR11048278,PRJNA605562,SAMN14070722,2017-07,450 – 750 m,deep,deep sea,USA,North America,USA:Gulf of Mexico,Systellaspis debilis,ILLUMINA,eye
+SRR11048280,PRJNA605562,SAMN14070720,2017-07,450 – 750 m,deep,deep sea,USA,North America,USA:Gulf of Mexico,Systellaspis debilis,ILLUMINA,eye
+SRR11048282,PRJNA605562,SAMN14070718,2017-07,450 – 750 m,deep,deep sea,USA,North America,USA:Gulf of Mexico,Systellaspis debilis,ILLUMINA,eye
+SRR11048284,PRJNA605562,SAMN14070716,2017-07,450 – 750 m,deep,deep sea,USA,North America,USA:Gulf of Mexico,Systellaspis debilis,ILLUMINA,eye
+SRR11048286,PRJNA605562,SAMN14070732,2017-07,150 – 330 m,shallow,deep sea,USA,North America,USA:Gulf of Mexico,Systellaspis debilis,ILLUMINA,eye
+SRR11048288,PRJNA605562,SAMN14070730,2017-07,150 – 330 m,shallow,deep sea,USA,North America,USA:Gulf of Mexico,Systellaspis debilis,ILLUMINA,eye
+SRR11048290,PRJNA605562,SAMN14070728,2017-07,150 – 330 m,shallow,deep sea,USA,North America,USA:Gulf of Mexico,Systellaspis debilis,ILLUMINA,eye
+SRR11048292,PRJNA605562,SAMN14070726,2017-07,150 – 330 m,shallow,deep sea,USA,North America,USA:Gulf of Mexico,Systellaspis debilis,ILLUMINA,eye
+SRR11048294,PRJNA605562,SAMN14070724,2017-07,150 – 330 m,shallow,deep sea,USA,North America,USA:Gulf of Mexico,Systellaspis debilis,ILLUMINA,eye
+SRR11048296,PRJNA605562,SAMN14070714,2017-07,450 – 750 m,deep,deep sea,USA,North America,USA:Gulf of Mexico,Systellaspis debilis,ILLUMINA,eye
