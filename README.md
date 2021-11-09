@@ -127,8 +127,8 @@ How many genes are differentially expressed at an adjusted stringent p-value or 
 How many genes show a log-fold change > 2?
 >Answer:
 
->How many genes show a log-fold change > 5?
-Answer:
+How many genes show a log-fold change > 5?
+>Answer:
 
 What are the 10 most-differentiated transcripts based on p-value?
 >Answer:
