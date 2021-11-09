@@ -4,9 +4,9 @@
 
 From the first part of this homework, you should have a tab-separated .tsv table with a different contig in each row and a different sample in each column, giving the raw number of reads that uniquely mapped to each contig for each sample.
 
-Next step is to determine which, if any, of these contigs are differentially expressed between your two treatment groups. The most popular DE analysis approaches are based in R, which we are not covering extensively in the class. These programs have extensive step-by-step help and vignettes available online. If you're not conversant in R, please make good use of these resources, and come talk to the instructors for additional help if needed.
+The next step is to determine which, if any, of these contigs are differentially expressed between your two treatment groups. The most popular DE analysis approaches are based in R, which we are not covering extensively in the class. These programs have extensive step-by-step help and vignettes available online. If you're not conversant in R, please make good use of these resources, and come talk to the instructors for additional help if needed.
 
-Copy this document and change the name to hw3b_answers_\[LASTNAME\].md, and reply in the document as prompted. We'll also ask you to create and save an R script and some results files to be pushed with your HW repo. Everything we want you to submit is listed at the bottom of this document.
+Copy this document and change the name to hw3b_answers_\[LASTNAME\].md, and reply in the document as prompted. We'll also ask you to create and save a jupyter notebook in R, a modified R script, and some results files and figures to be pushed with your HW repo. Everything we want you to submit is listed at the bottom of this document.
 
 Please use the differential expression R package assigned here:
 
@@ -90,17 +90,6 @@ How many transcripts are left in your data set after filtering (or not)?
 Following the guidance for your DE package, load your data into your DE program and associate your treatment (depth_factor) information with it. What commands did you use to do this?
 >Answer:
 
-The first step in some approaches is to normalize your data. This compensates for differences in sequencing depth across samples, sequencing biases, etc. This can be done differently depending on the DE analysis program you’re using. Some programs have this type of normalization baked-in, while you have to do it explicitly in others.
-
-What, if any, normalization did you do on your data?
->Answer:
-
-What metric did you use to normalize your data? What does this mean?
->Answer:
-
-What command(s) did you use to normalize your data?
->Answer:
-
 ## Step 3: Conduct DE analysis
 
 Now it’s time to look for differential expression between your two groups. Follow the guidance in your program’s help files on this. Your output should be a table of log-fold changes and p-values for your control:treatment comparison for each gene. (It may include other columns as well.) Make sure p-values are adjusted to alpha = 0.05.
@@ -120,7 +109,7 @@ Write your DE table to a comma-separated file like this:
 write.csv(RESULTS_TABLE, file = "hw4b_de-table_[LASTNAME].csv", quote = FALSE)
 ```
 
-The `quote = FALSE` is important - without this, R will write the contig names in quotation marks, which won't match the quotation-mark-free contig names in the GO annotation file, and the GO_MWU program you'll use for functional analysis will refuse to believe that they are the same names.
+The `quote = FALSE` is important - without this, R will write the contig names in quotation marks, which won't match the quotation-mark-free contig names in the GO annotation file, and the GO_MWU program you'll use for functional analysis will refuse to believe that they are the same names. (Isn't compatibility fun?)
 
 Push your results .csv file as part of your homework.
 
@@ -150,7 +139,7 @@ What are the 5 transcripts most downregulated in the treatment vs. control, base
 Why aren't the *same* genes identified using p-values and log2-fold change values?
 >Answer:
 
-Note: All programs have a lot of neat built-in plotting and other functions to explore your data. Feel free to check them out - they are often very helpful - but we're not asking you to include any differential expression plots in this homework.
+Note: All programs have a lot of neat built-in plotting and other functions to explore your data. Feel free to run some if you're keen - they are often very helpful - but you don't have to include any differential expression plots in this homework.
 
 
 ## Step 5: Functional enrichment
@@ -159,7 +148,7 @@ Now that you have a list of p-values and log2fold-change data, what does it all 
 
 This program expects a graphical output and it's a pain to work around this, so copy any necessary files to your local computer and work with GO_MWU in R on your local system. (You may also need to install perl, which is required by the program.)
 
-Clone the GO_MWU repo and follow the directions for running this analysis. The developers helpfully include a "template" file, `GO_MWU.R`, for running in R. Copy this file as `hw4b_go-mwu_LASTNAME.R` and modify this file to apply to your data.
+Clone the GO_MWU repo and follow the directions for running this analysis. The developers helpfully include a "template" file, `GO_MWU.R`, for running in R. Copy this file as `hw4b_go-mwu_\[LASTNAME\].R` and modify this file to apply to your data.
 
 Run GO_MWU on your data using adjusted p-values as your "continuous measure of change". Run this analysis 3 times: once for each GO category (Molecular Function, Cellular Component, Biological Process). There are some parameters you can "tune" to help highlight the most important functional categories without overwhelming the output with a zillion lines - "largest", "smallest", and "clusterCutHeight". Read about these in the program documentation, and play around with them to find a set of parameters that you think represents the data accurately and clearly.
 
@@ -173,11 +162,17 @@ What parameters did you pick for each GO analysis? Why?
 
 Save the resulting figures as `hw4b_go-mwu-res_\[GO-CATEGORY\]_\[LASTNAME\].pdf`. Scale the figure if needed to ensure it's legible when opened.
 
+How do you interpret these graphs? Why might this approach (ranked list) be better than enrichment based on a p-value cutoff for this analysis?
+
+>Answer:
 
 Using your biological knowledge and all the analyses you've run on these data, what kind of physiological changes do you think are important to diel vertical migration in these shrimp? Please explain briefly (a paragraph, two max):
 
-What caveats do you have about these analyses? If you had the opportunity to conduct one new experiment to explore this in more detail, what would you propose (a paragraph, two max)?
+>Answer:
 
+What caveats do you have about these analyses? If you had the opportunity to conduct one new experiment to explore this question in more detail, what would you propose (a paragraph, two max)?
+
+>Answer:
 
 
 About how long did this homework take you?
@@ -186,6 +181,11 @@ About how long did this homework take you?
 
 For your homework, please push to GitHub:
 
-    hw3b_answers_[LASTNAME].md: An annotated copy of this readme file including your answers.
-    hw3_de_[LASTNAME].R: A file containing all of the R commands you used in your analysis.
-    hw3_de-table_[LASTNAME].tsv: A tab-separated file of your DE results.
+    hw4b_answers_[LASTNAME].md: An annotated copy of this readme file including your answers.
+    HW4B_diffex.ipynb`: A jupyter notebook containing all of the R commands you used in your differential expression analysis
+    hw4b_de-table_[LASTNAME].csv: The results file from your differential expression analysis (table with contig name, p-value, log2-fold change, etc).
+    hw4b_go-mwu_\[LASTNAME\].R: GO_MWU running file, modified for your analysis (any one of the GO categories is fine here, no need to include 3 copies).
+    hw4b_go-mwu-res_MF_\[LASTNAME\].pdf: Graph of Molecular Function enrichment analysis.
+    hw4b_go-mwu-res_BP_\[LASTNAME\].pdf: Graph of Biological Process enrichment analysis.
+    hw4b_go-mwu-res_CC_\[LASTNAME\].pdf: Graph of Cellular Compartment enrichment analysis.
+   
