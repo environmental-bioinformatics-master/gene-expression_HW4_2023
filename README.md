@@ -20,9 +20,11 @@ For this part of the homework, modify the r_jupyter yaml file to create a new en
 
 Reminder: An extended note on making figures in R on a cluster: Do NOT try to make figures directly using R on Poseidon. By default, R prints to screen…and the HPC doesn’t have a screen. (It will not print to your local computer, since it’s not running locally.) If you want to make a figure, first open an "empty" pdf file, execute the command(s) that would typically print a figure to screen, and then close the pdf like this:
 
+```
 pdf(file = FILENAME.pdf)
 EXECUTE_COMMANDS_TO_MAKE_FIGURE
 dev.off()
+```
 
 To view the resulting pdf, either copy it to your local computer with scp, or keep an Jupyter notebook open in your working directory and view the file in that notebook.
 
@@ -182,11 +184,11 @@ About how long did this homework take you?
 
 For your homework, please push to GitHub:
 
-    hw4b_answers_[LASTNAME].md: An annotated copy of this readme file including your answers.
-    HW4B_diffex.ipynb`: A jupyter notebook containing all of the R commands you used in your differential expression analysis
-    hw4b_de-table_[LASTNAME].csv: The results file from your differential expression analysis (table with contig name, p-value, log2-fold change, etc).
-    hw4b_go-mwu_\[LASTNAME\].R: GO_MWU running file, modified for your analysis (any one of the GO categories is fine here, no need to include 3 copies).
-    hw4b_go-mwu-res_MF_\[LASTNAME\].pdf: Graph of Molecular Function enrichment analysis.
-    hw4b_go-mwu-res_BP_\[LASTNAME\].pdf: Graph of Biological Process enrichment analysis.
-    hw4b_go-mwu-res_CC_\[LASTNAME\].pdf: Graph of Cellular Compartment enrichment analysis.
+- `hw4b_answers_[LASTNAME].md`: An annotated copy of this readme file including your answers.
+- `HW4B_diffex.ipynb`: A jupyter notebook containing all of the R commands you used in your differential expression analysis
+- `hw4b_de-table_[LASTNAME].csv`: The results file from your differential expression analysis (table with contig name, p-value, log2-fold change, etc).
+- `hw4b_go-mwu_\[LASTNAME\].R`: GO_MWU running file, modified for your analysis (any one of the GO categories is fine here, no need to include 3 copies).
+- `hw4b_go-mwu-res_MF_\[LASTNAME\].pdf`: Graph of Molecular Function enrichment analysis.
+- `hw4b_go-mwu-res_BP_\[LASTNAME\].pdf`: Graph of Biological Process enrichment analysis.
+- `hw4b_go-mwu-res_CC_\[LASTNAME\].pdf`: Graph of Cellular Compartment enrichment analysis.
    
