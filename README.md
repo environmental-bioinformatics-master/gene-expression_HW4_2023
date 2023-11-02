@@ -31,7 +31,7 @@ What resources did you use to figure out how to run DESeq2 (please give URLs, et
 
 ## Step 2: Load data and prep for DE analysis
 
-To test for differential expression of eye genes at night vs during the day, you'll need to associate samples with the depth at which they were captured (your experimental "treatments"). I've provided a file called `hw4_sample_metadata.csv` listing all the SRA information given for each sample. Note that this files lists the SRR numbers only, while the sample names in your count file may be named slightly differently. These names **have to** be identical between the two files for downstream processing. If necessary, change the sample names in your counts table to match those in the sample metadata file. You can use any approach you like. How did you do this?
+To test for differential expression of eye genes at night vs during the day, you'll need to associate samples with the depth at which they were captured (your experimental "treatments"). I've provided a file called `hw4_sample_metadata.csv` listing all the SRA information given for each sample. Note that this files lists the SRR numbers only, while the sample names in your count file may be named slightly differently. These names **have to** be identical between the two files for downstream processing. If necessary, change the sample names in your counts table to match those in the sample metadata file. You can use any approach you like (does not need to be in R). Did you need to do this? If so, how did you do this?
 
 >Answer:
 
@@ -62,27 +62,23 @@ Check that this re-ordering worked with head(counts).
 
 ## Step 3: Begin your DE analysis
 
-For some approaches, you may want to pre-filter your data set to remove genes with very low expression. This slims down the data by removing genes whose expression is too low to give you any useful information on differential expression, which is helpful when you adjust your p-values to account for multiple tests. Various approaches handle low-expression filtering differently, and some explicitly do not recommend it; use the approach recommended for your DE package. Note: Depending on your approach, you may need to load the data into the analysis program before filtering it.
+For some approaches, you may want to pre-filter your data set to remove genes with very low expression. This slims down the data by removing genes whose expression is too low to give you any useful information on differential expression, which is helpful when you adjust your p-values to account for multiple tests. Various approaches handle low-expression filtering differently, and some explicitly do not recommend it; always check the approach recommended for your DE package.
 
-Did you filter or pre-filter your data to remove low-expressed transcripts? If so, what cutoff did you use and why? If not, why not?
+Load your data into DESeq2 and associate your treatment (depth_factor) information with it.
+
+How many transcripts are in your raw data set?
 >Answer:
 
-What command(s) did you use to filter your data?
+Filter your data to remove all contigs with < 5 reads mapped to them.
 
-How many transcripts are left in your data set after filtering (or not)?
->Answer:
-
-Following the guidance for your DE package, load your data into your DE program and associate your treatment (depth_factor) information with it. What commands did you use to do this?
+How many transcripts are left in your data set after filtering?
 >Answer:
 
 ## Step 3: Conduct DE analysis
 
-Now it’s time to look for differential expression between your two groups. Follow the guidance in your program’s help files on this. Your output should be a table of log-fold changes and p-values for your control:treatment comparison for each gene. (It may include other columns as well.) Make sure p-values are adjusted to alpha = 0.05.
+Now it’s time to look for differential expression between your two groups. Follow the DESeq2 guidance on this. Your output should be a table of log-fold changes and p-values for your control:treatment comparison for each gene. (It may include other columns as well.) Make sure p-values are adjusted to alpha = 0.05.
 
-What commands did you use to test differential expression in your data?
->Answer:
-
-How does your DE program model distribution of read counts (e.g. Poisson, negative binomial, etc)?
+How does DESeq2 model distribution of read counts (e.g. Poisson, negative binomial, etc)?
 >Answer:
 
 How many different transcripts are you using in this analysis? (Count just those with enough reads mapping to be informative the final DE analysis, excluding any removed from earlier filtering or determined by the program to have low counts.)
