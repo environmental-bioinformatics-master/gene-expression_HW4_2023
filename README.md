@@ -1,22 +1,14 @@
-# 2021_HW4B_Gene-Expression-2
+# 2023_HW4_Gene-Expression
 
-## DUE: 11:59 PM, 15 November
+## DUE: 11:59 PM, 14 November
 
-From the first part of this homework, you should have a tab-separated .tsv table with a different contig in each row and a different sample in each column, giving the raw number of reads that uniquely mapped to each contig for each sample.
+With your Snakemake homework, you should have generated a tab-separated .tsv table with a different contig in each row and a different sample in each column, giving the raw number of reads that uniquely mapped to each contig for each sample.
 
 The next step is to determine which, if any, of these contigs are differentially expressed between your two treatment groups. The most popular DE analysis approaches are based in R, which we are not covering extensively in the class. These programs have extensive step-by-step help and vignettes available online. If you're not conversant in R, please make good use of these resources, and come talk to the instructors for additional help if needed.
 
-Copy this document and change the name to hw3b_answers_\[LASTNAME\].md, and reply in the document as prompted. We'll also ask you to create and save a jupyter notebook in R, a modified R script, and some results files and figures to be pushed with your HW repo. Everything we want you to submit is listed at the bottom of this document.
+Copy this document and change the name to hw4_de_answers_\[LASTNAME\].md, and reply in the document as prompted. We'll also ask you to create and save an R script file, a modified R script, and some results files and figures to be pushed with your HW repo. Everything we want you to submit is listed at the bottom of this document.
 
-Please use the differential expression R package assigned here:
-
-**DESeq2**: Walter, Annaliese, Sabrina, Matthew, Katy, Caroline
-
-**edgeR**: Evie, Mira, Kate, Jane, Max, Sun
-
-Note: If you're not formally enrolled but want to do this homework, please pick whichever DE package strikes your fancy.
-
-For this part of the homework, modify the r_jupyter yaml file to create a new environment called `HW4B_env`. Make sure to run the extra line of code to set up an R kernel in Jupyter: `R -e 'IRkernel::installspec()'`. Install all of the R programs you use in the environment directly in R, and then spin up a new jupyter notebook in R called `HW4B_diffex.ipynb`. Run all your R commands for differential expression analysis in this notebook, and push it as part of the HW.
+You will be running most of your analyses in R. You have options! You can work on your local computer (in RStudio if you prefer), or on the HPC directly, or on the HPC in a Jupyter notebook with an R kernel. Whatever you choose, I want you to make a well-commented file containing *all of your R commands* for differential expression - this can be in *.R (R script) or *.ipynb (Jupyter notebook) format.
 
 Reminder: An extended note on making figures in R on a cluster: Do NOT try to make figures directly using R on Poseidon. By default, R prints to screen…and the HPC doesn’t have a screen. (It will not print to your local computer, since it’s not running locally.) If you want to make a figure, first open an "empty" pdf file, execute the command(s) that would typically print a figure to screen, and then close the pdf like this:
 
@@ -30,30 +22,20 @@ To view the resulting pdf, either copy it to your local computer with scp, or ke
 
 ## Part 1: Background and setup
 
-What DE approach are you using?
+You should already have DESeq2 installed on the HPC. If you don't, or if you want to work locally, install it. After loading DESeq2 (and any other necessary packages) into R via the library(PACKAGE) command, type sessionInfo(). This will show you everything that's been loaded, and its version number. Other attached packages gives details on everything loaded directly (rather than called as a dependency only). What packages are listed under "other attached packages"? Include package name and version number.
 > Answer:
 
-Is it recommended for any particular type of data / analysis?
+What resources did you use to figure out how to run DESeq2 (please give URLs, etc)?
 > Answer:
 
-What resources did you use to figure out how to run it (please give URLs, etc)?
-> Answer:
-
-What commands did you use to install R packages in your environment?
-
-```
-```
-
-After installing your DE package(s) and loading them in your new notebook via the library(PACKAGE) command, type sessionInfo(). This will show you everything that's been loaded, and its version number. Other attached packages gives details on everything loaded directly (rather than called as a dependency only). What packages are listed under "other attached packages"? Include package name and version number.
-> Answer:
 
 ## Step 2: Load data and prep for DE analysis
 
-To test for differential expression of eye genes at night vs during the day, you'll need to associate samples with the depth at whih they were captured (your experimental "treatments"). I've provided a file called `hw4_sample_metadata.csv` listing all the SRA information given for each sample. Note that this files lists the SRR numbers only, while the sample names in your count file may be named slightly differently. These names **have to** be identical between the two files for downstream processing. If necessary, change the sample names in your counts table to match those in the sample metadata file. You can use any approach you like. How did you do this?
+To test for differential expression of eye genes at night vs during the day, you'll need to associate samples with the depth at which they were captured (your experimental "treatments"). I've provided a file called `hw4_sample_metadata.csv` listing all the SRA information given for each sample. Note that this files lists the SRR numbers only, while the sample names in your count file may be named slightly differently. These names **have to** be identical between the two files for downstream processing. If necessary, change the sample names in your counts table to match those in the sample metadata file. You can use any approach you like. How did you do this?
 
 >Answer:
 
-First, you need to load your data in a format that your DE program can read. Most of the programs we're using require data in matrix format. This should load your count data in an appropriate format for downstream work:
+First, you need to load your data in a format that DESeq2 can recognize - like many DE programs, it likes matrix format. This should load your count data in an appropriate format for downstream work:
 
 ```
 counts = as.matrix(read.csv("COUNT_TABLE_FILE", sep="\t", row.names="Contig"))
@@ -185,7 +167,7 @@ About how long did this homework take you?
 For your homework, please push to GitHub:
 
 - `hw4b_answers_[LASTNAME].md`: An annotated copy of this readme file including your answers.
-- `HW4B_diffex.ipynb`: A jupyter notebook containing all of the R commands you used in your differential expression analysis
+- `HW4B_diffex.R` OR `HW4B_diffex.ipynb`: A commented R script OR jupyter notebook containing all of the R commands you used in your differential expression analysis
 - `hw4b_de-table_[LASTNAME].csv`: The results file from your differential expression analysis (table with contig name, p-value, log2-fold change, etc).
 - `hw4b_go-mwu_\[LASTNAME\].R`: GO_MWU running file, modified for your analysis (any one of the GO categories is fine here, no need to include 3 copies).
 - `hw4b_go-mwu-res_MF_\[LASTNAME\].pdf`: Graph of Molecular Function enrichment analysis.
