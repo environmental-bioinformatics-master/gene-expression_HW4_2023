@@ -87,7 +87,7 @@ How many different transcripts are you using in this analysis? (Count just those
 Write your DE table to a comma-separated file like this:
 
 ```
-write.csv(RESULTS_TABLE, file = "hw4b_de-table_[LASTNAME].csv", quote = FALSE)
+write.csv(RESULTS_TABLE, file = "hw4_de-table_[LASTNAME].csv", quote = FALSE)
 ```
 
 The `quote = FALSE` is important - without this, R will write the contig names in quotation marks, which won't match the quotation-mark-free contig names in the GO annotation file, and the GO_MWU program you'll use for functional analysis will refuse to believe that they are the same names. (Isn't compatibility fun?)
@@ -131,7 +131,7 @@ Now that you have a list of p-values and log2fold-change data, what does it all 
 
 This program expects a graphical output and it's a pain to work around this, so copy any necessary files to your local computer and work with GO_MWU in R on your local system. (You may also need to install perl, which is required by the program.)
 
-Clone the GO_MWU repo and follow the directions for running this analysis. The developers helpfully include a "template" file, `GO_MWU.R`, for running in R. Copy this file as `hw4b_go-mwu_\[LASTNAME\].R` and modify this file to apply to your data.
+Clone the GO_MWU repo and follow the directions for running this analysis. The developers helpfully include a "template" file, `GO_MWU.R`, for running in R. Copy this file as `hw4_go-mwu_LASTNAME.R` and modify this file to apply to your data.
 
 Run GO_MWU on your data using adjusted p-values as your "continuous measure of change". Run this analysis 3 times: once for each GO category (Molecular Function, Cellular Component, Biological Process). There are some parameters you can "tune" to help highlight the most important functional categories without overwhelming the output with a zillion lines - "largest", "smallest", and "clusterCutHeight". Read about these in the program documentation, and play around with them to find a set of parameters that you think represents the data accurately and clearly.
 
@@ -143,7 +143,7 @@ What parameters did you pick for each GO analysis? Why?
 >Cellular Compartment:
 
 
-Save the resulting figures as `hw4b_go-mwu-res_\[GO-CATEGORY\]_\[LASTNAME\].pdf`. Scale the figure if needed to ensure it's legible when opened.
+Save the resulting figures as `hw4_go-mwu-res_GO-CATEGORY_LASTNAME.pdf`. Scale the figure if needed to ensure it's legible when opened.
 
 How do you interpret these graphs? Why might this approach (ranked list) be better than enrichment based on a p-value cutoff for this analysis?
 
@@ -164,11 +164,11 @@ About how long did this homework take you?
 
 For your homework, please push to GitHub:
 
-- `hw4b_answers_[LASTNAME].md`: An annotated copy of this readme file including your answers.
-- `HW4B_diffex.R` OR `HW4B_diffex.ipynb`: A commented R script OR jupyter notebook containing all of the R commands you used in your differential expression analysis
-- `hw4b_de-table_[LASTNAME].csv`: The results file from your differential expression analysis (table with contig name, p-value, log2-fold change, etc).
-- `hw4b_go-mwu_\[LASTNAME\].R`: GO_MWU running file, modified for your analysis (any one of the GO categories is fine here, no need to include 3 copies).
-- `hw4b_go-mwu-res_MF_\[LASTNAME\].pdf`: Graph of Molecular Function enrichment analysis.
-- `hw4b_go-mwu-res_BP_\[LASTNAME\].pdf`: Graph of Biological Process enrichment analysis.
-- `hw4b_go-mwu-res_CC_\[LASTNAME\].pdf`: Graph of Cellular Compartment enrichment analysis.
+- `hw4_answers_LASTNAME.md`: An annotated copy of this readme file including your answers.
+- `hw4_diffex_LASTNAME.R` OR `HW4_diffex_LASTNAME.ipynb`: A commented R script OR jupyter notebook containing all of the R commands you used in your differential expression analysis
+- `hw4_de-table_LASTNAME.csv`: The results file from your differential expression analysis (table with contig name, p-value, log2-fold change, etc).
+- `hw4_go-mwu_LASTNAME.R`: GO_MWU running file, modified for your analysis (any one of the GO categories is fine here, no need to include 3 copies).
+- `hw4_go-mwu-res_MF_LASTNAME.pdf`: Graph of Molecular Function enrichment analysis.
+- `hw4_go-mwu-res_BP_LASTNAME.pdf`: Graph of Biological Process enrichment analysis.
+- `hw4_go-mwu-res_CC_LASTNAME.pdf`: Graph of Cellular Compartment enrichment analysis.
    
