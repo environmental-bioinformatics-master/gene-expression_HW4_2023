@@ -131,9 +131,19 @@ Now that you have a list of p-values and log2fold-change data, what does it all 
 
 This program expects a graphical output and it's a pain to work around this, so copy any necessary files to your local computer and work with GO_MWU in R on your local system. (You may also need to install perl, which is required by the program.)
 
-Clone the GO_MWU repo and follow the directions for running this analysis. The developers helpfully include a "template" file, `GO_MWU.R`, for running in R. Copy this file as `hw4_go-mwu_LASTNAME.R` and modify this file to apply to your data.
+Clone the GO_MWU repo and follow the directions for running this analysis. The developers helpfully include a "template" file, `GO_MWU.R`, for running in R. Copy this file as `hw4_go-mwu_LASTNAME.R` and modify this file to apply to your data. You will need to download a files in the symlinked directory from HW3 to run GO_MWU.
 
-Run GO_MWU on your data using adjusted p-values as your "continuous measure of change". Run this analysis 3 times: once for each GO category (Molecular Function, Cellular Component, Biological Process). There are some parameters you can "tune" to help highlight the most important functional categories without overwhelming the output with a zillion lines - "largest", "smallest", and "clusterCutHeight". Read about these in the program documentation, and play around with them to find a set of parameters that you think represents the data accurately and clearly.
+What reference file did you need from your symlinked directory?
+>Answer:
+
+Run GO_MWU on your data using adjusted p-values as your "continuous measure of change". You will first need to modify the data file you produced in the prior step. Use the command line to do this.
+
+What command did you use to modify you DE table to run GO_MWU?
+>Answer:
+
+Copy your modified data file (for running GO_MWU) into your homework repo.
+
+Run GO_MWU 3 times: once for each GO category (Molecular Function, Cellular Component, Biological Process). There are some parameters you can "tune" to help highlight the most important functional categories without overwhelming the output with a zillion lines - "largest", "smallest", and "clusterCutHeight". Read about these in the program documentation, and play around with them to find a set of parameters that you think represents the data accurately and clearly.
 
 What parameters did you pick for each GO analysis? Why?
 >Molecular Function:
@@ -153,7 +163,7 @@ Using your biological knowledge and all the analyses you've run on these data, w
 
 >Answer:
 
-What caveats do you have about these analyses? If you had the opportunity to conduct one new experiment to explore this question in more detail, what would you propose (a paragraph, two max)?
+What caveats do you have about these analyses? If you had the opportunity to redesign the sequencing strategy for this project to explore this question in more detail, what would you propose (a paragraph, two max)?. Assume you have access to a good number of samples collected as per the paper, and a reasonable (though not overly generous) sequencing budget. 
 
 >Answer:
 
@@ -168,6 +178,7 @@ For your homework, please push to GitHub:
 - `hw4_diffex_LASTNAME.R` OR `HW4_diffex_LASTNAME.ipynb`: A commented R script OR jupyter notebook containing all of the R commands you used in your differential expression analysis
 - `hw4_de-table_LASTNAME.csv`: The results file from your differential expression analysis (table with contig name, p-value, log2-fold change, etc).
 - `hw4_go-mwu_LASTNAME.R`: GO_MWU running file, modified for your analysis (any one of the GO categories is fine here, no need to include 3 copies).
+- The modified DE data file you used to run GO_MWU (no required naming convention, as long as it's the same name you use for it in `hw4_go-mwu_LASTNAME.R`).
 - `hw4_go-mwu-res_MF_LASTNAME.pdf`: Graph of Molecular Function enrichment analysis.
 - `hw4_go-mwu-res_BP_LASTNAME.pdf`: Graph of Biological Process enrichment analysis.
 - `hw4_go-mwu-res_CC_LASTNAME.pdf`: Graph of Cellular Compartment enrichment analysis.
