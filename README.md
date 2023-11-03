@@ -35,10 +35,10 @@ To test for differential expression of eye genes at night vs during the day, you
 
 >Answer:
 
-First, you need to load your data in a format that DESeq2 can recognize - like many DE programs, it likes matrix format. This should load your count data in an appropriate format for downstream work:
+First, you need to load your data in a format that DESeq2 can recognize - like many DE programs, it likes matrix format. This basic command should load your count data in an appropriate format for downstream work:
 
 ```
-counts = as.matrix(read.csv("COUNT_TABLE_FILE", sep="\t", row.names="Contig"))
+counts = as.matrix(read.csv("COUNT_TABLE_FILE", sep="\t", row.names="CONTIG_COL_NAME"))
 ```
 
 Check your matrix with dim(counts) and head(counts), to make sure it loaded properly. What is the result of your dim(counts) command?
@@ -64,12 +64,12 @@ Check that this re-ordering worked with head(counts).
 
 For some approaches, you may want to pre-filter your data set to remove genes with very low expression. This slims down the data by removing genes whose expression is too low to give you any useful information on differential expression, which is helpful when you adjust your p-values to account for multiple tests. Various approaches handle low-expression filtering differently, and some explicitly do not recommend it; always check the approach recommended for your DE package.
 
-Load your data into DESeq2 and associate your treatment (depth_factor) information with it.
+Load your data into DESeq2 and associate your treatment (depth_factor) information with it. (This may require some additional prep of your data files.)
 
 How many transcripts are in your raw data set?
 >Answer:
 
-Filter your data to remove all contigs with < 5 reads mapped to them.
+Filter your data to remove all transcripts with < 20 reads mapped to them.
 
 How many transcripts are left in your data set after filtering?
 >Answer:
@@ -96,16 +96,18 @@ Push your results .csv file as part of your homework.
 
 ## Step 4: Explore your results
 
+Remember to update your R  / jupyter script with any commands you used to answer these questions!
+
 How many genes are differentially expressed at an adjusted standard p-value or equivalent (p < 0.05)?
 >Answer:
 
 How many genes are differentially expressed at an adjusted stringent p-value or equivalent (p < 0.01)?
 >Answer:
 
-How many genes show a log-fold change > 2?
+How many genes show a log-fold change > 2 or < -2?
 >Answer:
 
-How many genes show a log-fold change > 5?
+How many genes show a log-fold change > 5 or < -5?
 >Answer:
 
 What are the 10 most-differentiated transcripts based on p-value?
@@ -120,7 +122,7 @@ What are the 5 transcripts most downregulated in the treatment vs. control, base
 Why aren't the *same* genes identified using p-values and log2-fold change values?
 >Answer:
 
-Note: All programs have a lot of neat built-in plotting and other functions to explore your data. Feel free to run some if you're keen - they are often very helpful - but you don't have to include any differential expression plots in this homework.
+Note: DESeq2 has a lot of neat built-in plotting and other functions to explore your data. Feel free to run some if you're keen - they are often very helpful - but you don't have to include any differential expression plots in this homework.
 
 
 ## Step 5: Functional enrichment
